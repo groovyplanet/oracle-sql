@@ -237,7 +237,6 @@ JOIN
     )E ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
 ORDER BY E.HUMAN DESC;
 
-
 --
 --문제15
 --부서에 모든 컬럼, 주소, 우편번호, 부서별 평균 연봉을 구해서 출력하세요.
