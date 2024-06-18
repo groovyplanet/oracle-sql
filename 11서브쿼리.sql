@@ -108,10 +108,12 @@ FROM (SELECT *
 SELECT ROWNUM,
        FIRST_NAME,
        SALARY
-FROM (SELECT FIRST_NAME,
+FROM (
+      SELECT FIRST_NAME,
        SALARY
   FROM EMPLOYEES
-ORDER BY SALARY DESC)
+ORDER BY SALARY DESC 
+      )
 WHERE ROWNUM BETWEEN 11 AND 20; -- ROWNUM 특징이 반드시 1부터 시작해야함. (결과가 X)
 
 -- ORDER BY를 먼저 시킨 결과를 만들고 , ROWNUM 가상열로 다시 만들고 , 재조회
@@ -132,11 +134,12 @@ WHERE RN BETWEEN 11 AND 20; -- 안에서 RN으로 만들어진 가상열 밖에서 사용할 수 있
 --예시
 --근속년수 5년 째 되는 사람들만 출력하겠다.
 SELECT*
-FROM(SELECT FIRST_NAME , 
+FROM(
+       SELECT FIRST_NAME , 
        HIRE_DATE,
        TRUNC((SYSDATE-HIRE_DATE) / 365 ) AS 근속년수 -- 안에서 만든 가상열에 대해서 재조회 해낼때 인라인뷰가 사용됨
-FROM EMPLOYEES
-ORDER BY 근속년수 DESC
+       FROM EMPLOYEES
+       ORDER BY 근속년수 DESC
 )
 WHERE MOD(근속년수 ,5) =0;
 
